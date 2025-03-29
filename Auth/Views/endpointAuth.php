@@ -6,7 +6,7 @@ require_once '..\Models\User.php';
 require_once '..\Utils\AuthDatabase.php';
 require_once '..\..\config\Secrets.php';
 
-const dureeValid = 600;
+const dureeValid = 3600;
 
 
 function gererRequete(){
@@ -19,7 +19,6 @@ function gererRequete(){
 
         case "POST":
             $data = recupererData();
-
             $response = $controller->creationToken($data);
             $controller->deliver_response($response["code"],$response["message"],$response["data"]);
             break;
