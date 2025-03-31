@@ -8,57 +8,62 @@ require_once '..\..\config\Secrets.php';
 
 const dureeValid = 3600;
 
+// Headers CORS (accessibles depuis un autre domaine)
+setCorsHeaders();
 
-function gererRequete(){
+// Gérer les requêtes préflight CORS (méthode OPTIONS)
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(204); // No Content
+    exit();
+}
 
+// Traitement des autres requêtes
+gererRequete();
+
+
+// ========== Fonctions ==========
+
+function setCorsHeaders() {
+    header("Access-Control-Allow-Origin: *"); // à restreindre si besoin
+    header("Access-Control-Allow-Credentials: true");
+    header("Access-Control-Allow-Headers: Content-Type, Authorization");
+    header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+    header("Content-Type: application/json; charset=UTF-8");
+}
+
+function gererRequete() {
     $controller = new EndpointController();
-
     $http_method = $_SERVER["REQUEST_METHOD"];
 
     switch ($http_method) {
-
         case "POST":
             $data = recupererData();
             $response = $controller->creationToken($data);
-            $controller->deliver_response($response["code"],$response["message"],$response["data"]);
+            $controller->deliver_response($response["code"], $response["message"], $response["data"]);
             break;
 
         case "GET":
             $token = get_bearer_token();
             $response = $controller->verificationToken($token);
-            $controller->deliver_response($response["code"],$response["message"],$response["data"]);
+            $controller->deliver_response($response["code"], $response["message"], $response["data"]);
             break;
 
         default:
             $response = $controller->unsuported_response($http_method);
-            $controller->deliver_response($response["code"],$response["message"],$response["data"]);
-
+            $controller->deliver_response($response["code"], $response["message"], $response["data"]);
             break;
-
     }
 }
 
-/**
- * @return void
- */
-
-
-
-function recupererData() : ?array{
+function recupererData(): ?array {
     $postedData = file_get_contents('php://input');
-    return json_decode($postedData,true);
+    return json_decode($postedData, true);
 }
 
-function getTokenRole($token){
+function getTokenRole($token) {
     if ($token == null) {
         return null;
     }
     $payload = explode(".", $token)[1];
-    return json_decode(base64_decode($payload))->role;
+    return json_decode(base64_decode($payload))->role ?? null;
 }
-
-
-
-
-gererRequete();
-
