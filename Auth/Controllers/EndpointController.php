@@ -36,7 +36,7 @@ class EndpointController
             return array("code" =>200, "message"=> "Authentification OK", "data"=> $token);
 
         }
-        return array("code" => 400, "message"=> "login et/ou mot de passe incorrect", "data"=> null);
+        return array("code" => 401, "message"=> "login et/ou mot de passe incorrect", "data"=> null);
     }
 
     function unsuported_response($http_method): array {
@@ -48,11 +48,11 @@ class EndpointController
 
         if ($token == null) {
             $data = array('isMissing' => true, 'isExpiredOrInvalid' => false, 'role' => null, 'id' => null);
-            return array("code" => 200, "message"=> "token manquant", "data"=> $data);
+            return array("code" => 401, "message"=> "token manquant", "data"=> $data);
 
         } else if (!is_jwt_valid($token, SECRET)) {
             $data = array('isMissing' => false, 'isExpiredOrInvalid' => true, 'role' => null);
-            return array("code" => 200, "message"=> "Requete valide. Le token est invalid ou expiré", "data"=> $data);
+            return array("code" => 401, "message"=> "Requete valide. Le token est invalid ou expiré", "data"=> $data);
 
         } else {
             $data = array('isMissing' => false, 'isExpiredOrInvalid' => false, 'role' => getTokenRole($token));
