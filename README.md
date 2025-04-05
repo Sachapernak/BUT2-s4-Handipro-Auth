@@ -11,4 +11,4 @@ POST https://handipromanager.alwaysdata.net/handiauth/auth
 
 et 
 GET https://handipromanager.alwaysdata.net/handiauth/auth
-+ Authorization : Bearer [Token]
+avec le header : Authorization : Bearer [Token]
