@@ -1,0 +1,5 @@
+RewriteEngine On
+RewriteBase /handiauth/
+
+# Redirige /auth vers le fichier endpointAuth.php
+RewriteRule ^auth$ Auth/Views/endpointAuth.php [L,QSA]

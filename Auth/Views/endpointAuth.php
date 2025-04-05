@@ -1,10 +1,10 @@
 <?php
 
-require_once '..\Utils\jwt.php';
-require_once '..\Controllers\EndpointController.php';
-require_once '..\Models\User.php';
-require_once '..\Utils\AuthDatabase.php';
-require_once '..\..\config\Secrets.php';
+require_once __DIR__ . '/../Utils/jwt.php';
+require_once __DIR__ . '/../Controllers/EndpointController.php';
+require_once __DIR__ . '/../Models/User.php';
+require_once __DIR__ . '/../Utils/AuthDatabase.php';
+require_once __DIR__ . '/../../config/Secrets.php';
 
 const dureeValid = 3600;
 

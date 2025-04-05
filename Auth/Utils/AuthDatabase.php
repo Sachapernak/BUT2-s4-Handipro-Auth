@@ -4,7 +4,7 @@ namespace Auth\Utils;
 use PDO;
 use PDOException;
 
-require_once '../../config/Secrets.php';
+require_once __DIR__ . '/../../config/Secrets.php';
 
 class AuthDatabase {
     private static ?AuthDatabase $instance = null;
