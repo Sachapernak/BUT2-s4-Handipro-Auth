@@ -1,14 +1,9 @@
-# BUT2-s4-Handipro-Auth
-Projet universitaire sur la mise en place d'une API Rest - partie authentification 
+# Partie "Auth" du projet universitaire Handipro Manager
+Ce dépot contient l'api d'authentification de l'application Handipro Manager.
 
-# Usage 
-POST https://handipromanager.alwaysdata.net/handiauth/auth
+# Documentation
+La documentation est disponnible a l'addresse suivante :<br>
+https://documenter.getpostman.com/view/41624673/2sB2cUBP8h#be8b4a9b-5871-43ad-9392-9f2b9b580471<br>
 
-{
-    "login": "login",
-    "password": "password"
-}
-
-et 
-GET https://handipromanager.alwaysdata.net/handiauth/auth
-avec le header : Authorization : Bearer [Token]
+# Note
+Si vous souhaitez essayer l'API, merci de nous contacter afin d'obtenir un identifiant.
